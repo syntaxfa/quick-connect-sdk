@@ -6,11 +6,12 @@ const ChatButton = () => {
   const [input, setInput] = useState("");
   const [isFirstOpen, setIsFirstOpen] = useState(true);
 
-  // اضافه کردن پیام اولیه هنگام باز شدن اولین بار
   useEffect(() => {
     if (isChatOpen && isFirstOpen) {
-      setMessages([{ text: "سلام! چطور می‌توانم به شما کمک کنم؟", sender: "support" }]);
-      setIsFirstOpen(false); // جلوگیری از اضافه شدن دوباره
+      setMessages([
+        { text: "سلام! چطور می‌توانم به شما کمک کنم؟", sender: "support" },
+      ]);
+      setIsFirstOpen(false);
     }
   }, [isChatOpen, isFirstOpen]);
 
@@ -21,10 +22,8 @@ const ChatButton = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (input.trim()) {
-      // اضافه کردن پیام کاربر به لیست
       setMessages((prev) => [...prev, { text: input, sender: "user" }]);
       setInput("");
-      // اینجا می‌تونید بعداً کد API رو اضافه کنید
     }
   };
 
@@ -96,7 +95,10 @@ const ChatButton = () => {
               </div>
             ))}
           </div>
-          <form onSubmit={handleSendMessage} className="p-4 border-t border-gray-700">
+          <form
+            onSubmit={handleSendMessage}
+            className="p-4 border-t border-gray-700"
+          >
             <div className="flex gap-2">
               <input
                 type="text"
